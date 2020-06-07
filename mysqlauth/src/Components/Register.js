@@ -8,8 +8,9 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const result = await (
-      await fetch("http://localhost:4000/register", {
+    const result = await // await fetch("http://localhost:4000/register", {
+    (
+      await fetch("http://localhost:4000/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

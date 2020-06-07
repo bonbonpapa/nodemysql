@@ -10,8 +10,9 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const result = await (
-      await fetch("http://localhost:4000/login", {
+    const result = await // await fetch("http://localhost:4000/login", {
+    (
+      await fetch("http://localhost:4000/authenticate", {
         method: "POST",
         credentials: "include",
         headers: {

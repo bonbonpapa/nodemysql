@@ -1,5 +1,5 @@
 require("dotenv/config");
-const db_config = require("./config.js");
+const config = require("./config.js");
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
@@ -14,13 +14,14 @@ const {
 } = require("./tokens.js");
 const { fakeDB } = require("./fakeDB.js");
 const { isAuth } = require("./isAuth.js");
+const AuthController = require("./AuthController.js");
 
 //Create connection
 
 const db = mysql.createConnection({
   host: "localhost",
-  user: db_config.db_user,
-  password: db_config.db_password,
+  user: config.db_config.db_user,
+  password: config.db_config.db_password,
   database: "nodemysql",
 });
 
@@ -168,6 +169,8 @@ app.post("/register", async (req, res) => {
   }
 });
 
+app.post("/signup", AuthController.signUp);
+
 // 2. login a user
 
 app.post("/login", async (req, res) => {
@@ -199,6 +202,9 @@ app.post("/login", async (req, res) => {
     });
   }
 });
+
+app.post("/authenticate", AuthController.authenticateUser);
+
 // 3. logout a user
 app.post("/logout", (_req, res) => {
   res.clearCookie("refreshtoken", { path: "/refresh_token" });
