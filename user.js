@@ -13,6 +13,10 @@ const modelDefinition = {
     type: Sequelize.STRING,
     allowNull: false,
   },
+  role: {
+    type: Sequelize.INTEGER,
+    defaultValue: config.userRoles.user,
+  },
 };
 
 const modelOptions = {
